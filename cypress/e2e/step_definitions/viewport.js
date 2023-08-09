@@ -13,3 +13,19 @@ When('I switch to mobile view', () => {
 Then('I should see the hamburger icon', () => {
 	cy.get('img[alt="hamburguer icon"]').should('exist')
 })
+
+When('I click the hamburger icon', () => {
+	cy.get('img[alt="hamburguer icon"]').should('exist').click()
+})
+
+Then(
+	'I should see the hamburger menu with the following items:',
+	(dataTable) => {
+		dataTable.hashes().forEach((row) => {
+			cy.get("ul[data-testid='#hamburguer-menu']")
+				.should('be.visible')
+				.find('li')
+				.should('have.length', 4)
+		})
+	},
+)
